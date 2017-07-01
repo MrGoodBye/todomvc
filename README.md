@@ -1,21 +1,18 @@
-# todomvc
+# vue-todomvc
 
-> 基于Vue,Vuex,vue-router等生态的一个Demo
+> 使用vue-cli webpack构建
 
-## Build Setup
+包含大量的注释,非常适合vue新手以及正想学习vue的开发人员.
+
+## 快速打开
 
 ``` bash
-# install dependencies
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+# 开启服务,服务默认监听8080端口,并自动打开浏览器
+npm start
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
+# 若8080端口被占,请重新开启服务:
+set PORT=8000&npm start
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
