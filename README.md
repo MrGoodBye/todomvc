@@ -1,6 +1,6 @@
 # todomvc
 
-> Vuex
+> 基于Vue,Vuex,vue-router等生态的一个Demo
 
 ## Build Setup
 

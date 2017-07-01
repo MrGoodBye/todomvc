@@ -1,11 +1,16 @@
 <template>
   <header class="header">
     <h1>todos</h1>
+    <!--新增todo-->
+    <!--keyup事件修改输入框的值-->
+    <!--回车触发添加事件-->
+    <!--TODO 若使用change事件触发changeInput事件,-->
+    <!--会导致连续两次添加同样的todo时,第二次无法添加的错误效果,请查证-->
     <input
       placeholder="What needs to be done?"
       class="new-todo"
       :value="newTodo"
-      @change="changeInput"
+      @keyup="changeInput"
       @keyup.enter="add">
   </header>
 </template>
@@ -35,11 +40,8 @@
       // 输入框的change事件修改newTodo
       changeInput(e) {
         this.newTodo = e.target.value
+        e.target.value = null
       }
     }
   }
 </script>
-
-<style>
-
-</style>

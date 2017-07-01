@@ -7,10 +7,11 @@ import * as types from './mutation-types'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  // 在state中最好将所有会用到的属性都初始化,在组件中给state添加新的属性会比较麻烦
   state: {
-    todos: [],
-    visibility: ALL,
-    editingId: ''
+    todos: [],// todo列表
+    visibility: ALL,// 显示状态:显示所有,显示已完成,显示未完成
+    editingId: ''// 正在编辑的todo的id
   },
   mutations: {
     /**
@@ -19,8 +20,9 @@ export default new Vuex.Store({
      * @param payload
      */
       [types.ADD_TODO](state, payload) {
+      // 将新创建的todo压入todos头部
       state.todos.unshift({
-        id: Math.random(),
+        id: Math.random(),// 定义一个id,便于编辑,删除等操作
         title: payload.value,
         completed: false
       });
@@ -59,18 +61,31 @@ export default new Vuex.Store({
      * @param state
      */
       [types.CLEAR_COMPLETED](state) {
+      // Array.prototype.filter方法为一个纯函数,不会给调用者本身造成副作用(即调用filter的数组并不会改变),
+      // 所以必须重新赋值
       state.todos = state.todos.filter(todo => !todo.completed)
     },
-    [types.EDITING](state, payload) {
+    /**
+     * 编辑todo,保存正在编辑的todo的id
+     * @param state
+     * @param payload
+     */
+      [types.EDITING](state, payload) {
       state.editingId = payload.id
     },
-    [types.SAVE](state, payload) {
+    /**
+     * 保存编辑,即更新对应的todo
+     * @param state
+     * @param payload
+     */
+      [types.SAVE](state, payload) {
       for (let todo of state.todos) {
         if (todo.id === state.editingId) {
           todo.title = payload.value;
           break;
         }
       }
+      // 更新完之后将正在编辑的id属性editingId重置为空
       state.editingId = '';
     }
   },
@@ -87,9 +102,15 @@ export default new Vuex.Store({
       return state.todos.length !== getters.leftCounts
     },
     // 计算是否都完成
+    // 用于1.是否处于全选状态(全选按钮是否已选中),
+    // 2.显示/隐藏全选按钮
+    // 当todos为空时,不显示;
+    // 当未完成的todo个数leftCounts为0时,不显示;
+    // TODO 该项目中使用路由的方法使得无法使用allDone属性来判断显示/隐藏全选按钮,请查证
     allDone: (state, {leftCounts}) => {
       return state.todos.length && !leftCounts
     }
   },
-  strict: process.env.NODE_ENV !== 'production'// 非生产环境下使用严格模式
+  // 非生产环境下使用严格模式
+  strict: process.env.NODE_ENV !== 'production'
 })

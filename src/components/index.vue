@@ -11,12 +11,6 @@
   import List from './list'
   import Footer from './footer'
   export default {
-    name: 'hello',
-    data () {
-      return {
-        msg: 'Welcome to Your Vue.js App'
-      }
-    },
     components: {
       VHeader: Header,
       List,
