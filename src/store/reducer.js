@@ -4,6 +4,8 @@ import toggleTodoHandler from './handler/toggleTodoHandler';
 import deleteTodoHandler from './handler/deleteTodoHandler';
 import clearCompletedHandler from './handler/clearCompletedHandler';
 import toggleAllHandler from './handler/toggleAllHandler';
+import editingHandler from './handler/editingHandler';
+import saveHandler from './handler/saveHandler';
 import {ALL} from '../assets/visibility';
 
 // 初始化状态数据
@@ -16,7 +18,7 @@ const initialState = {
         }
     ],// todo列表
     visibility: ALL,// 显示状态:显示所有,显示已完成,显示未完成
-    editingId: ''// 正在编辑的todo的id
+    editingTodo: ''// 正在编辑的todo的id
 };
 
 
@@ -35,7 +37,13 @@ export default function todoReducer(state = initialState, {type, payload}) {
             return clearCompletedHandler(state);
             break;
         case actionTypes.TOGGLE_ALL:
-            return toggleAllHandler(state,payload);
+            return toggleAllHandler(state, payload);
+            break;
+        case actionTypes.EDITING:
+            return editingHandler(state, payload);
+            break;
+        case actionTypes.SAVE:
+            return saveHandler(state,payload);
         default:// 如果没有default值,在组建中mapStateToProps时的state为undefined,请尝试
             return state;
             break;

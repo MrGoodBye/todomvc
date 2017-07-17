@@ -1,45 +1,23 @@
 import React, {Component} from 'react'
+import Item from '../item'
 
-// functional component
-// 功能性组件:todo条目组件
-const TodoItem = (props) => {
-    const {todo, toggleTodoDispatcher, destroyTodoDispatcher} = props;
-    return (
-        <li className={`todo${todo.completed ? ' completed' : ''}`}>
-            <div className="view">
-                <input
-                    type="checkbox"
-                    className="toggle"
-                    onChange={() => toggleTodoDispatcher(todo.id)}
-                    checked={todo.completed}
-                />
-                <label>{todo.title}</label>
-                <button
-                    className="destroy"
-                    onClick={() => destroyTodoDispatcher(todo.id)}
-                />
-            </div>
-            <input type="text" className="edit"/>
-        </li>
-    )
-};
 class list extends Component {
     constructor(props) {
         super(props)
     }
 
     render() {
-        const {todos, toggleTodoDispatcher, destroyTodoDispatcher, showable, toggleAllDispatcher, all_done} = this.props;
+        const {
+            todos,
+            showable,
+            toggleAllDispatcher,
+            all_done,
+        } = this.props;
         let todoItem;
         if (todos.length) {
             todoItem = todos.map((todo) => {
                 return (
-                    <TodoItem
-                        key={todo.id}
-                        todo={todo}
-                        toggleTodoDispatcher={toggleTodoDispatcher}
-                        destroyTodoDispatcher={destroyTodoDispatcher}
-                    />
+                    <Item key={todo.id} todo={todo}/>
                 )
             });
         }

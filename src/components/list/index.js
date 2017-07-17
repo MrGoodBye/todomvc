@@ -1,13 +1,10 @@
 import list from './list.js'
 import {connect} from 'react-redux'
-import {toggleAllAction, toggleTodoAction, destroyTodoAction} from './actions'
+import {toggleAllAction} from './actions'
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        toggleTodoDispatcher: (id) => dispatch(toggleTodoAction(id)),
-        destroyTodoDispatcher: (id) => dispatch(destroyTodoAction(id)),
         toggleAllDispatcher: (checked) => dispatch(toggleAllAction(checked)),
-
     }
 }
 
