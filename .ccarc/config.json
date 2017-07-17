@@ -1,0 +1,10 @@
+{
+  "type": "class",
+  "path": "./src/components",
+  "jsExtension": "js",
+  "cssExtension": "css",
+  "includeTests": false,
+  "includeStories": false,
+  "indexFile": false,
+  "connected": true
+}
