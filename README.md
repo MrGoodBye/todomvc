@@ -1,4 +1,5 @@
-# vue-todomvc
+# todomvc
+本项目为各版本的todomvc，主要使用当前流行的一些技术。主分支为`vue`版本
 
 > 使用vue-cli webpack构建
 

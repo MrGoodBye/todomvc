@@ -40,6 +40,7 @@
       // 输入框的change事件修改newTodo
       changeInput(e) {
         this.newTodo = e.target.value
+        // 修改后必须将元素的value置为空,否则无法会造成连续输入两个相同的值无法触发change事件
         e.target.value = null
       }
     }
