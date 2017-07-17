@@ -1,27 +1,23 @@
 import React, {Component} from 'react'
-import {toggleTodoAction, destroyTodoAction} from './actions'
 
 // functional component
 // 功能性组件:todo条目组件
 const TodoItem = (props) => {
-    const {todo, dispatch} = props;
-    const toggleTodoHandler = (id) => {
-        dispatch(toggleTodoAction(id))
-    };
-    const destroy = (id) => {
-        dispatch(destroyTodoAction(id))
-    };
+    const {todo, toggleTodoDispatcher, destroyTodoDispatcher} = props;
     return (
         <li className={`todo${todo.completed ? ' completed' : ''}`}>
             <div className="view">
                 <input
                     type="checkbox"
                     className="toggle"
-                    onChange={() => toggleTodoHandler(todo.id)}
+                    onChange={() => toggleTodoDispatcher(todo.id)}
                     checked={todo.completed}
                 />
                 <label>{todo.title}</label>
-                <button className="destroy" onClick={() => destroy(todo.id)}></button>
+                <button
+                    className="destroy"
+                    onClick={() => destroyTodoDispatcher(todo.id)}
+                />
             </div>
             <input type="text" className="edit"/>
         </li>
@@ -33,7 +29,7 @@ class list extends Component {
     }
 
     render() {
-        const {todos, dispatch} = this.props;
+        const {todos, toggleTodoDispatcher, destroyTodoDispatcher, showable, toggleAllDispatcher, all_done} = this.props;
         let todoItem;
         if (todos.length) {
             todoItem = todos.map((todo) => {
@@ -41,7 +37,8 @@ class list extends Component {
                     <TodoItem
                         key={todo.id}
                         todo={todo}
-                        dispatch={dispatch}
+                        toggleTodoDispatcher={toggleTodoDispatcher}
+                        destroyTodoDispatcher={destroyTodoDispatcher}
                     />
                 )
             });
@@ -50,7 +47,9 @@ class list extends Component {
             <section className="main">
                 <input
                     type="checkbox"
-                    className="toggle-all"
+                    className={`toggle-all${showable ? '' : ' hide'}`}
+                    checked={all_done}
+                    onChange={(e) => toggleAllDispatcher(e.target.checked)}
                 />
                 <ul className="todo-list">
                     {todoItem}

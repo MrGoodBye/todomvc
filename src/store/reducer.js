@@ -3,6 +3,7 @@ import addTodoHandler from './handler/addTodoHandler';
 import toggleTodoHandler from './handler/toggleTodoHandler';
 import deleteTodoHandler from './handler/deleteTodoHandler';
 import clearCompletedHandler from './handler/clearCompletedHandler';
+import toggleAllHandler from './handler/toggleAllHandler';
 import {ALL} from '../assets/visibility';
 
 // 初始化状态数据
@@ -33,6 +34,8 @@ export default function todoReducer(state = initialState, {type, payload}) {
         case actionTypes.CLEAR_COMPLETED:
             return clearCompletedHandler(state);
             break;
+        case actionTypes.TOGGLE_ALL:
+            return toggleAllHandler(state,payload);
         default:// 如果没有default值,在组建中mapStateToProps时的state为undefined,请尝试
             return state;
             break;
